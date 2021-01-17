@@ -125,7 +125,6 @@ Date:   Sat Jan 9 23:41:33 2021 +0800
 git reset 48a538c6eb6ef225dfc889d1fbae09570e523bb3 --soft 
 git reset 48a538c6eb6ef225dfc889d1fbae09570e523bb3 --soft 
 
-<<<<<<< HEAD
 18.git revert
 
 
@@ -136,11 +135,9 @@ git reset 48a538c6eb6ef225dfc889d1fbae09570e523bb3 --soft
 然后执行git pull
 这样在修改代码就好了
 
-9.test
 
 
-=======
-18.想回退到某一次提交
+20.想回退到某一次提交
 
       原理： git revert是用于“反做”某一个版本，以达到撤销该版本的修改的目的。比如，我们commit了三个版本（版本一、版本二、 版本三），
       突然发现版本二不行（如：有bug），想要撤销版本二，
@@ -180,7 +177,7 @@ git reset 48a538c6eb6ef225dfc889d1fbae09570e523bb3 --soft
       add1  add3  README.md
 
 
-19.合并多次提交记录
+21.合并多次提交记录
 git rebase -i HEAD~2
 按下键盘i进入编辑模式，要保留的记录使用pick，
 其他的改为squash,按Esc退出编辑模式，:wq 保存并退出
@@ -199,7 +196,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 使用git push -f
 
-20.加入要将某一个分支的某一次提交合并到另外一个分支
+22.加入要将某一个分支的某一次提交合并到另外一个分支
 例如要将A分支的一个commit合并到B分支：
 首先切换到A分支
 git checkout A
@@ -211,3 +208,21 @@ git log
 git checkout B
 git cherry-pick 325d41
 然后就将A分支的某个commit合并到了B分支了
+
+23:git stash用法
+
+（1）git stash save "save message"  : 执行存储时，添加备注，方便查找，只有git stash 也要可以的，但查找时不方便识别。
+
+（2）git stash list  ：查看stash了哪些存储
+
+（3）git stash show ：显示做了哪些改动，默认show第一个存储,如果要显示其他存贮，后面加stash@{$num}，比如第二个 git stash show stash@{1}
+
+（4）git stash show -p : 显示第一个存储的改动，如果想显示其他存存储，命令：git stash show  stash@{$num}  -p ，比如第二个：git stash show  stash@{1}  -p
+
+（5）git stash apply :应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@{0}，如果要使用其他个，git stash apply stash@{$num} ， 比如第二个：git stash apply stash@{1} 
+
+（6）git stash pop ：命令恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash,即stash@{0}，如果要应用并删除其他stash，命令：git stash pop stash@{$num} ，比如应用并删除第二个：git stash pop stash@{1}
+
+（7）git stash drop stash@{$num} ：丢弃stash@{$num}存储，从列表中删除这个存储
+
+（8）git stash clear ：删除所有缓存的stash
